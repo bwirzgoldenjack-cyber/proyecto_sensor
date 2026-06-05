@@ -1,0 +1,372 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#050505;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+    display:flex;
+}
+
+/* =======================================
+SIDEBAR
+======================================= */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:220px;
+    height:100vh;
+
+    background:#050505;
+
+    border-right:1px solid rgba(255,215,0,0.12);
+
+    padding:25px 18px;
+
+    z-index:100;
+}
+
+.sidebar-logo{
+    width:170px;
+    max-width:100%;
+    object-fit:contain;
+
+    margin-bottom:50px;
+
+    display:block;
+
+    filter:drop-shadow(0 0 15px rgba(255,215,0,.4));
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#b8a56a;
+    padding:14px 18px;
+    border-radius:14px;
+    transition:.3s;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.menu a:hover,
+.menu .active{
+    background:#111111;
+    color:#f5c542;
+    border:1px solid rgba(245,197,66,.2);
+}
+
+/* =======================================
+MAIN
+======================================= */
+
+.dashboard{
+    margin-left:220px;
+    width:calc(100% - 220px);
+    padding:25px;
+}
+
+/* =======================================
+TOPBAR
+======================================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.topbar h1{
+    font-size:42px;
+    font-weight:800;
+    color:#f5c542;
+    margin-bottom:8px;
+}
+
+.subtitulo{
+    color:#7c7c7c;
+    font-size:14px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    background:#00ff95;
+    border-radius:50%;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.fecha{
+    text-align:right;
+}
+
+.fecha span{
+    display:block;
+    color:#7f6b30;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:4px;
+}
+
+.fecha h2{
+    font-size:32px;
+    color:#f5c542;
+}
+
+.logout{
+    background:#8b0000;
+    color:white;
+    border:none;
+    padding:14px 24px;
+    border-radius:14px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* =======================================
+LIVE
+======================================= */
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:#00ff95;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    margin-bottom:25px;
+}
+
+.live span{
+    width:8px;
+    height:8px;
+    background:#00ff95;
+    border-radius:50%;
+    box-shadow:0 0 12px #00ff95;
+}
+
+/* =======================================
+CARDS
+======================================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#111111;
+    border:1px solid rgba(255,215,0,.08);
+    border-radius:22px;
+    padding:26px 30px;
+}
+
+.card p{
+    color:#7e6b34;
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+.card h2{
+    font-size:50px;
+    font-weight:800;
+}
+
+.entrada-card h2{
+    color:#22c55e;
+}
+
+.salida-card h2{
+    color:#ef4444;
+}
+
+/* =======================================
+FILTROS
+======================================= */
+
+.filtros{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.filtros input,
+.filtros select{
+    background:#111111;
+    border:1px solid rgba(255,215,0,.12);
+    border-radius:12px;
+    padding:14px;
+    color:white;
+    outline:none;
+}
+
+.excel,
+.pdf{
+    border:none;
+    padding:14px 20px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.excel{
+    background:#22c55e;
+    color:black;
+}
+
+.pdf{
+    background:#ef4444;
+    color:white;
+}
+
+/* =======================================
+TABLA
+======================================= */
+
+.tabla-container{
+    background:#0b0b0b;
+    border:1px solid rgba(255,215,0,.08);
+    border-radius:24px;
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#111111;
+}
+
+th{
+    text-align:left;
+    padding:20px;
+    color:#7e6b34;
+    font-size:12px;
+    letter-spacing:3px;
+}
+
+td{
+    padding:20px;
+    border-top:1px solid rgba(255,255,255,.05);
+    color:#e9c56c;
+}
+
+tbody tr:hover{
+    background:rgba(255,215,0,.03);
+}
+
+/* =======================================
+BADGES
+======================================= */
+
+.entrada{
+    color:#22c55e;
+    background:rgba(34,197,94,.1);
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+}
+
+.salida{
+    color:#ef4444;
+    background:rgba(239,68,68,.1);
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+}
+
+/* =======================================
+RESPONSIVE
+======================================= */
+
+@media(max-width:1100px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .dashboard{
+        margin-left:0;
+        width:100%;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .filtros{
+        flex-direction:column;
+    }
+}
+@media(max-width:700px){
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .topbar h1{
+        font-size:32px;
+    }
+
+    .fecha h2{
+        font-size:24px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .filtros{
+        flex-direction:column;
+    }
+
+    .filtros input,
+    .filtros select,
+    .excel,
+    .pdf{
+        width:100%;
+    }
+
+    .tabla-container{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:700px;
+    }
+}

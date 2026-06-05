@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historial</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/historial.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- =======================================
+    SIDEBAR
+    ======================================= -->
+
+    <aside class="sidebar">
+
+        <img
+            class="sidebar-logo"
+            src="{{ url_for('static', filename='img/logo.png') }}"
+        >
+
+        <div class="menu">
+
+            <a href="{{ url_for('panel') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('sucursales') }}">
+                Sucursales
+            </a>
+
+            <a href="{{ url_for('puertas') }}">
+                Puertas
+            </a>
+
+            <a class="active" href="{{ url_for('historial') }}">
+                Historial
+            </a>
+
+            <a href="{{ url_for('configuracion') }}">
+                Configuración
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- =======================================
+    MAIN
+    ======================================= -->
+
+    <main class="dashboard">
+
+        <!-- HEADER -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>Historial</h1>
+
+                <p class="subtitulo">
+
+                    <span class="dot"></span>
+
+                    Registro cronológico de eventos
+
+                </p>
+
+            </div>
+
+            <div class="top-right">
+
+                <div class="fecha">
+
+                    <span id="fecha"></span>
+
+                    <h2 id="hora"></h2>
+
+                </div>
+
+                <button class="logout">
+
+                    CERRAR SESIÓN
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- LIVE -->
+
+        <div class="live">
+
+            <span></span>
+
+            ACTUALIZANDO EN TIEMPO REAL
+
+        </div>
+
+        <!-- CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <p>EVENTOS HOY</p>
+
+                <h2>8</h2>
+
+            </div>
+
+            <div class="card entrada-card">
+
+                <p>ENTRADAS</p>
+
+                <h2>5</h2>
+
+            </div>
+
+            <div class="card salida-card">
+
+                <p>SALIDAS</p>
+
+                <h2>3</h2>
+
+            </div>
+
+        </div>
+
+        <!-- FILTROS -->
+
+        <div class="filtros">
+
+            <input
+                type="text"
+                id="buscarSucursal"
+                placeholder="Buscar sucursal"
+            >
+
+            <select id="filtroTipo">
+
+                <option value="TODOS">
+                    Todos
+                </option>
+
+                <option value="ENTRADA">
+                    Entradas
+                </option>
+
+                <option value="SALIDA">
+                    Salidas
+                </option>
+
+            </select>
+
+            <input
+                type="date"
+                id="filtroFecha"
+            >
+
+            <button class="excel">
+                Excel
+            </button>
+
+            <button class="pdf">
+                PDF
+            </button>
+
+        </div>
+
+        <!-- TABLA -->
+
+        <div class="tabla-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Hora</th>
+                        <th>Tipo</th>
+                        <th>Sucursal</th>
+                        <th>Puerta</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaBody">
+
+                    <tr>
+
+                        <td>14:32:11</td>
+
+                        <td>
+                            <span class="entrada">
+                                ↑ Entrada
+                            </span>
+                        </td>
+
+                        <td>Quilmes</td>
+
+                        <td>Alem</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>14:28:03</td>
+
+                        <td>
+                            <span class="salida">
+                                ↓ Salida
+                            </span>
+                        </td>
+
+                        <td>Quilmes</td>
+
+                        <td>Mitre</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>14:21:47</td>
+
+                        <td>
+                            <span class="entrada">
+                                ↑ Entrada
+                            </span>
+                        </td>
+
+                        <td>Solano</td>
+
+                        <td>845</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+<script src="{{ url_for('static', filename='js/historial.js') }}"></script>
+
+</body>
+
+</html>

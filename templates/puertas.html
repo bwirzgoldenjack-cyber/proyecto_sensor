@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puertas | GoldenJack</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/puertas.css') }}">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <img class="sidebar-logo" src="{{ url_for('static', filename='img/logo.png') }}">
+
+    <div class="menu">
+
+        <a href="{{ url_for('panel') }}">Dashboard</a>
+        <a href="{{ url_for('sucursales') }}">Sucursales</a>
+        <a class="active" href="{{ url_for('puertas') }}">Puertas</a>
+        <a href="{{ url_for('historial') }}">Historial</a>
+        <a href="{{ url_for('configuracion') }}">Configuración</a>
+
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="dashboard">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Puertas</h1>
+            <p class="subtitulo">Accesos físicos por sucursal</p>
+        </div>
+
+        <div class="top-right">
+
+            <div class="fecha">
+                <span id="fecha">--</span>
+                <h2 id="hora">--:--:--</h2>
+            </div>
+
+            <button class="logout">CERRAR SESIÓN</button>
+
+        </div>
+
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+        <button class="sucursal-btn active">QUILMES</button>
+        <button class="sucursal-btn">SOLANO</button>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="acciones">
+
+        <input type="text" id="buscar" placeholder="Buscar puerta...">
+
+        <input type="text" id="nuevaPuerta" placeholder="Nueva puerta">
+
+        <button class="btn-agregar" onclick="agregarPuerta()">
+            + Agregar
+        </button>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="puertas-grid" id="puertasGrid">
+        <!-- JS RENDERIZA TODO AQUÍ -->
+    </div>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/puertas.js') }}"></script>
+
+</body>
+</html>

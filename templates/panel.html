@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard de Aforo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <img
+    src="{{ url_for('static', filename='img/logo.png') }}"
+    class="sidebar-logo"
+    alt="GoldenJack Logo">
+
+    <div class="menu">
+
+        <a href="{{ url_for('panel') }}" class="active">Dashboard</a>
+        <a href="{{ url_for('sucursales') }}">Sucursales</a>
+        <a href="{{ url_for('puertas') }}">Puertas</a>
+        <a href="{{ url_for('historial') }}">Historial</a>
+        <a href="{{ url_for('configuracion') }}">Configuración</a>
+
+    </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="dashboard">
+
+<header class="header">
+
+    <div class="header-left">
+        <h1>Dashboard de Aforo</h1>
+        <p>Monitoreo en tiempo real — Arduino Active</p>
+    </div>
+
+    <div class="header-right">
+
+        <div class="time-box">
+            <span id="fecha">---</span>
+            <strong id="hora">---</strong>
+        </div>
+
+        <a href="/logout" class="logout">
+            Cerrar sesión
+        </a>
+
+    </div>
+
+</header>
+
+<!-- SELECT -->
+<div class="selector-box">
+
+    <select id="selectorPuerta"
+            class="input-config"
+            onchange="actualizar()">
+
+        <option value="Alem">
+            Quilmes - Alem
+        </option>
+
+        <option value="Mitre">
+            Quilmes - Mitre
+        </option>
+
+        <option value="Rivadavia">
+            Quilmes - Rivadavia
+        </option>
+
+        <option value="844">
+            Solano - 844
+        </option>
+
+        <option value="845">
+            Solano - 845
+        </option>
+
+    </select>
+
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat-card green">
+
+        <div class="stat-text">
+            <h4>TOTAL ENTRADAS</h4>
+            <h2 id="entradas">0</h2>
+        </div>
+
+        <div class="circle">↑</div>
+
+    </div>
+
+    <div class="stat-card red">
+
+        <div class="stat-text">
+            <h4>TOTAL SALIDAS</h4>
+            <h2 id="salidas">0</h2>
+        </div>
+
+        <div class="circle">↓</div>
+
+    </div>
+
+</div>
+
+<!-- MAIN CARD -->
+<div class="main-card">
+
+    <div class="live">
+        <span></span>
+        TRANSMISIÓN EN VIVO
+    </div>
+
+    <h2>AFORO ACTUAL</h2>
+
+    <div class="numero" id="personas">0</div>
+
+    <div id="sucursalActual" class="sucursal-actual">
+        Quilmes - Alem
+    </div>
+
+</div>
+<script src="{{ url_for('static', filename='js/panel.js') }}"></script>
+
+<!-- BOTONES DE PRUEBA -->
+
+<div style="margin-top:20px;text-align:center;">
+
+    <button onclick="evento('ENTRADA')">
+        ➕ Simular Entrada
+    </button>
+
+    <button onclick="evento('SALIDA')">
+        ➖ Simular Salida
+    </button>
+
+</div>
+
+<script>
+
+function evento(tipo){
+
+    const puerta =
+        document.getElementById("selectorPuerta").value;
+
+    let sucursal = "Quilmes";
+
+    if(puerta == "844" || puerta == "845"){
+        sucursal = "Solano";
+    }
+
+    fetch("/movimiento",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            tipo: tipo,
+            sucursal: sucursal,
+            puerta: puerta
+        })
+
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        console.log(data);
+
+        if(data.ok){
+
+            setTimeout(()=>{
+                actualizar();
+            },500);
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

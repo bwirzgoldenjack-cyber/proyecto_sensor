@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GoldenJack Login</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+<div class="login">
+
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt="logo GoldenJack">
+
+    <h1>ACCESO</h1>
+
+    <p>Panel de monitoreo en tiempo real</p>
+
+    <div class="line"></div>
+
+    <form method="POST" action="">
+
+        <div>
+
+            <label class="label">
+                USUARIO
+            </label>
+
+            <input
+            type="text"
+            name="usuario"
+            placeholder="admin"
+            required>
+
+        </div>
+
+        <div>
+
+            <label class="label">
+                CONTRASEÑA
+            </label>
+
+            <input
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required>
+
+        </div>
+
+        <button type="submit">
+            INGRESAR
+        </button>
+
+    </form>
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    <div class="footer">
+        Sistema GoldenJack · Acceso restringido
+    </div>
+
+</div>
+
+</body>
+</html>

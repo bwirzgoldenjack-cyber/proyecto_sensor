@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Configuración</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/configuracion.css') }}">
+</head>
+
+<body>
+
+<div class="config-container">
+
+    <div class="card">
+
+        <h2>⚙️ CONFIGURACIÓN</h2>
+
+        <form method="POST" action="/guardar_config">
+
+            <label>Base de datos</label>
+            <input type="text" name="database" value="{{ database }}">
+
+            <button type="submit">Guardar</button>
+
+        </form>
+
+    </div>
+
+</div>
+<script src="{{ url_for('static', filename='js/configuracion.js') }}"></script>
+</body>
+</html>
+

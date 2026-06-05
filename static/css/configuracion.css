@@ -1,0 +1,54 @@
+body{
+    margin:0;
+    font-family:Inter;
+    background:#0b0b0b;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.config-container{
+    width:400px;
+}
+
+.card{
+    background:#111;
+    padding:25px;
+    border-radius:16px;
+    border:1px solid rgba(255,215,66,0.15);
+}
+
+h2{
+    color:#f5c542;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    color:#ccc;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border-radius:10px;
+    border:1px solid #333;
+    background:#000;
+    color:white;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#f5c542;
+    font-weight:bold;
+    cursor:pointer;
+}
