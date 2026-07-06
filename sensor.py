@@ -1,4 +1,3 @@
-
 print("APP ARRANCO")
 
 from flask import Flask, render_template, request, redirect, session, jsonify, url_for, send_file
@@ -742,14 +741,22 @@ def toggle_puerta(id):
         return jsonify({"error": "No autorizado"}), 401
 
     with db() as cur:
-        # Desactivar todas
-        cur.execute("UPDATE puertas SET activa = 0")
+        cur.execute("SELECT activa FROM puertas WHERE id=%s", (id,))
+        row = cur.fetchone()
 
-        # Activar solamente la elegida
-        cur.execute(
-            "UPDATE puertas SET activa = 1 WHERE id = %s",
-            (id,)
-        )
+        if not row:
+            return jsonify({"error": "No existe"}), 404
+
+        if row["activa"]:
+            # Ya estaba activa -> el click es "DESACTIVAR" (frontend lo
+            # pide asÃ­). La apagamos y quedan todas apagadas.
+            cur.execute("UPDATE puertas SET activa = 0 WHERE id = %s", (id,))
+        else:
+            # Estaba apagada -> el click es "ACTIVAR". Apagamos todas
+            # las demÃ¡s (solo puede haber una puerta activa en todo el
+            # sistema, ver /sensor/puerta_activa) y prendemos esta.
+            cur.execute("UPDATE puertas SET activa = 0")
+            cur.execute("UPDATE puertas SET activa = 1 WHERE id = %s", (id,))
 
     return jsonify({"ok": True})
 
