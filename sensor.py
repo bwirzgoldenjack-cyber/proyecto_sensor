@@ -1,3 +1,4 @@
+
 print("APP ARRANCO")
 
 from flask import Flask, render_template, request, redirect, session, jsonify, url_for, send_file
@@ -674,6 +675,38 @@ def sucursales_data():
             ORDER BY s.nombre
         """, (HEARTBEAT_TIMEOUT_SEGUNDOS,))
         return jsonify({"sucursales": cur.fetchall()})
+
+
+@app.route("/toggle_sucursal", methods=["POST"])
+def toggle_sucursal():
+    """Prende/apaga el flag administrativo `activa` de una sucursal.
+    Ojo: esto NO tiene nada que ver con online/offline (eso lo decide
+    el heartbeat de sensor.py). Acá pueden convivir varias sucursales
+    activas al mismo tiempo, no aplica la lógica de 'una sola' como
+    en toggle_puerta."""
+    if not auth():
+        return jsonify({"error": "No autorizado"}), 401
+
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+    nombre = data.get("nombre", "").strip().lower()
+    if not nombre:
+        return jsonify({"error": "Nombre vacío"}), 400
+
+    with db() as cur:
+        cur.execute("SELECT id FROM sucursales WHERE LOWER(TRIM(nombre))=%s", (nombre,))
+        s = cur.fetchone()
+        if not s:
+            return jsonify({"error": "No existe"}), 404
+
+        cur.execute("""
+            UPDATE sucursales
+            SET activa = IF(activa=1,0,1)
+            WHERE id=%s
+        """, (s["id"],))
+
+    return jsonify({"ok": True})
 
 
 @app.route("/agregar_sucursal", methods=["POST"])
